@@ -42,10 +42,10 @@ var JobLength = 0;
 
 
 function renderJobs() {
-    memeArray = memeArray.sort(function(a,b){return b.votes-a.votes})
+  JobArray = JobArray.sort(function(a,b){return b.votes-a.votes})
     var template = $('#template').html();
     Mustache.parse(template);
-    var rendered = Mustache.render(template, {memeArray});
+    var rendered = Mustache.render(template, {JobArray});
     $('#jobBody').html(rendered);
   }
 
