@@ -91,6 +91,7 @@ function renderJobs() {
     // console.log('decodedGet', decodedGet);
 
     total = await callStatic('getdetailsNum', []);
+    console.log("TOTal number of jobs", total)
 
 
 
