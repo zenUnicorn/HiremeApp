@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
 </head>
-<body>
+<body >
+
 <header id="header" class="header">
     <div class="container">
         <div class="row">
@@ -19,6 +21,8 @@
         </div>
     </div>
     </header>
+
+    <div id="scrollbar">
 
 
     <div id="hero">
@@ -62,32 +66,34 @@
                             <button id="registerBtn" class="btn btn-primary">Register</button>
                         </form>
                   
-                        <div id="memeBody">
+                        <div id="jobBody">
 
                         </div>
         <hr>
-<footer>
+    
+        <footer>
        
     <a class="link" href="#">Built with love by Shittu Olumide AYodeji</a>
                                
                             <nav id="secondary" class="menu">
                                 <a class="link" href="#">Twitter</a>
                                 <a class="link" href="#">Linkedin</a>
-                                <a class="link" href="#">Facebook</a>
+                                <a class="link" href="#">Facebook</a></nav>
     </footer>
+</div>
     <script id="template" type="x-tmpl-mustache">
 
-            {{#memeArray}}
+            {{#JobArray}}
                 <div class="card">
                         <h5 class="card-title">{{creatorName}}</h5>
-                        <h5>{{memeUrl}}</h5>
+                        <h5>{{jobUrl}}</h5>
                         <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
                         <input type="number" class="form-control" placeholder="Amount" id={{index}}>
                         <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
                         </div>
                 </div>
-            {{/memeArray}}
+            {{/JobArray}}
 
     </script>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -101,5 +107,6 @@
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
           integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
           crossorigin="anonymous"></script>
+       </div>
 </body>
 </html>
