@@ -34,11 +34,13 @@ contract Hireme =
         let updatedDetails = state.details{ [index].voteCount = updatedvoteCount }
         put(state{ details = updatedDetails })
 `;
+
+
 const contractAddress ='ct_fAh4JwmrTtPkcQnt9ydVmCcnuqwtmmjwUR6YDgsGgJatRRUP4';
 var client = null;
 var JobArray = [];
 var JobLength = 0;
-// var memeArray = [];
+
 
 
 function renderJobs() {
@@ -82,13 +84,6 @@ function renderJobs() {
     $("#loader").show();
   
     client = await Ae.Aepp();
-  
-    // const contract = await client.getContractInstance(contractSource, {contractAddress});
-    // const calledGet = await contract.call('getdetailsNum', [], {callStatic: true}).catch(e => console.error(e));
-    // console.log('calledGet', calledGet);
-  
-    // const decodedGet = await calledGet.decode().catch(e => console.error(e));
-    // console.log('decodedGet', decodedGet);
 
     total = await callStatic('getdetailsNum', []);
     console.log("TOTal number of jobs", total)
