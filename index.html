@@ -1,112 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hire - Me</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/scrollbar.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Hire - Me</title>
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/skeleton.css">
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/scrollbar.css">
 </head>
 <body >
 
 <header id="header" class="header">
-    <div class="container">
-        <div class="row">
-            <div class="four columns">
-                <img src="img/LOGO.png" id="logo">
-            </div>
-        </div>
-    </div>
-    </header>
-
-    <div id="scrollbar">
-
-
-    <div id="hero">
-        <div class="container">
-            <div class="row">
-                    <div class="six columns">
-                        <div class="hero-content">
-                                <h2>Hire a Developer Today</h2>
-                                <p>And send aethos as reward to employer</p>
-                                <form action="#" id="search" method="post" class="form">
-                                    <input class="u-full-width" type="text" placeholder="Start Searching " id="search-course">
-                                    <input type="submit" id="submit-search-course" class="submit-search-course">
-                                </form>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="main-bar">
-        <div class="container">
-            
-        </div>
-
-    </div>
-    
-    
-
-    <div id="courses-list" class="container">
-        <h1 id="heading" class="heading">Register Jobs</h1>
-        <div id="message">
-                <div id="loader" class="alert alert-secondary">
-                    <img src="img/loading.gif" alt="">
-                    <div><b>Loading...</b></div>
-                </div>
-        
-            </div>
-                        <form>
-                            <input type="text" id="regUrl" class="form-control" placeholder="Job Url"><br>
-                            <input type="text" id="regName" class="form-control" placeholder="Job Role"><br>
-                            <button id="registerBtn" class="btn btn-primary">Register</button>
-                        </form>
-                  
-                        <div id="jobBody">
-
-                        </div>
-        <hr>
-    
-        <footer>
-       
-    <a class="link" href="#">Built with love by Shittu Olumide AYodeji</a>
-                               
-                            <nav id="secondary" class="menu">
-                                <a class="link" href="#">Twitter</a>
-                                <a class="link" href="#">Linkedin</a>
-                                <a class="link" href="#">Facebook</a></nav>
-    </footer>
+<div class="container">
+<div class="row">
+<div class="four columns">
+    <img src="img/LOGO.png" id="logo">
 </div>
-    <script id="template" type="x-tmpl-mustache">
+</div>
+</div>
+</header>
 
-            {{#JobArray}}
-                <div class="card">
-                        <h5 class="card-title">{{creatorName}}</h5>
-                        <h5>{{jobUrl}}</h5>
-                        <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
-                        <input type="number" class="form-control" placeholder="Amount" id={{index}}>
-                        <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
-                        </div>
-                </div>
-            {{/JobArray}}
+<div id="scrollbar">
 
-    </script>
-          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-          crossorigin="anonymous"></script>
-          
-        <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js">
-          </script>
-          <script src="js/app.js"></script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-          crossorigin="anonymous"></script>
-       </div>
+
+<div id="hero">
+<div class="container">
+<div class="row">
+        <div class="six columns">
+            <div class="hero-content">
+                    <h2>Hire a Developer Today</h2>
+                    <p>And send aethos as reward to employer</p>
+                    <form action="#" id="search" method="post" class="form">
+                        <input class="u-full-width" type="text" placeholder="Start Searching " id="search-course">
+                        <input type="submit" id="submit-search-course" class="submit-search-course">
+                    </form>
+            </div>
+        </div>
+</div>
+</div>
+</div>
+
+<div class="main-bar">
+<div class="container">
+
+</div>
+
+</div>
+
+
+
+<div id="courses-list" class="container">
+<h1 id="heading" class="heading">Register Jobs</h1>
+<div id="message">
+    <div id="loader" class="alert alert-secondary">
+        <img src="img/loading.gif" alt="">
+        <div><b>Loading...</b></div>
+    </div>
+
+</div>
+            <form>
+                <input type="text" id="regUrl" class="form-control" placeholder="Job Url"><br>
+                <input type="text" id="regName" class="form-control" placeholder="Job Role"><br>
+                <button id="registerBtn" class="btn btn-primary">Register</button>
+            </form>
+
+            <div id="jobBody">
+
+            </div>
+<hr>
+
+<footer>
+
+<a class="link" href="#">Built with love by Shittu Olumide AYodeji</a>
+
+                <nav id="secondary" class="menu">
+                    <a class="link" href="#">Twitter</a>
+                    <a class="link" href="#">Linkedin</a>
+                    <a class="link" href="#">Facebook</a></nav>
+</footer>
+</div>
+<script id="template" type="x-tmpl-mustache">
+
+{{#JobArray}}
+    <div class="card">
+            <h5 class="card-title">{{creatorName}}</h5>
+            <h5>{{jobUrl}}</h5>
+            <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
+            <input type="number" class="form-control" placeholder="Amount" id={{index}}>
+            <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
+            </div>
+    </div>
+{{/JobArray}}
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js">
+</script>
+<script src="js/app.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
+</div>
 </body>
 </html>
