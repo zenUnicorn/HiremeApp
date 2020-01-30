@@ -126,7 +126,7 @@ ul {
   #loader {
     margin: 1em;
     color:#F7296E;
-    display: none;
+    display: none !important;
   }
   .inputForm{
     margin-top: 2em;
@@ -145,3 +145,4 @@ ul {
     background-color: #F5F5F5;
     border: 0.5em solid #F5F5F5;
   }
+  
