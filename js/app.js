@@ -1,106 +1,73 @@
 const contractSource = `
-contract Hireme =   
-    record detail = {
-        finderAddress : address,
-        url		  : string,
-        nameOfJob	  : string,
-        voteCount	  : int }
-   
-    record state = 
-        { details : map(int, detail),
-        detailsNum : int}
+contract Hireme = 
+ record detail = 
+  { finderAddress : address,
+    companyName	: string,
+    jobRole	  : string,
+    jobLink	  : string,
+    jobLocation : string,
+    picture : string,
+    voteCount : int }
+    
+ record state = { 
+    details : map(int, detail),
+    detailsNum : int}
+  
+ entrypoint init() = 
+  { details = {},
+    detailsNum = 0 }
  
-    entrypoint init() = {
-        details = {},
-        detailsNum = 0 }
+ entrypoint getJob(index : int) : detail = 
+  switch(Map.lookup(index, state.details))
+   None  => abort("There is no Job with that ID.")
+   Some(x) => x
 
-    entrypoint getJob(index : int) : detail = 
-        switch(Map.lookup(index, state.details))
-            None  => abort("There is no Job with that ID.")
-            Some(x) => x  
-
-    stateful entrypoint addJob(url' : string, nameOfJob' : string) = 
-        let detail = { finderAddress  = Call.caller, url = url', nameOfJob = nameOfJob', voteCount = 0}
-        let index = getdetailsNum() + 1
-        put(state {details[index] = detail, detailsNum = index})
-
-    entrypoint getdetailsNum() : int = 
-        state.detailsNum
-        
-    payable stateful entrypoint voteJob(index : int) =
-        let detail = getJob(index)
-        Chain.spend(detail.finderAddress, Call.value)
-        let updatedvoteCount = detail.voteCount + Call.value
-        let updatedDetails = state.details{ [index].voteCount = updatedvoteCount }
-        put(state{ details = updatedDetails })
+ stateful entrypoint addJob(companyName' : string, jobRole' : string, jobLink' : string, jobLocation' : string,picture' : string) = 
+  let detail = { finderAddress  = Call.caller, companyName = companyName', jobRole = jobRole', jobLink = jobLink', picture = picture', jobLocation = jobLocation', voteCount = 0}
+  let index = getdetailsNum() + 1
+  put(state {details[index] = detail, detailsNum = index})
+  
+ entrypoint getdetailsNum() : int = 
+  state.detailsNum
+ payable stateful entrypoint voteJob(index : int) =
+  let detail = getJob(index)
+  Chain.spend(detail.finderAddress, Call.value)
+  let updatedvoteCount = detail.voteCount + Call.value
+  let updatedDetails = state.details{ [index].voteCount = updatedvoteCount }
+  put(state{ details = updatedDetails })
 `;
-
-
-const contractAddress ='ct_fAh4JwmrTtPkcQnt9ydVmCcnuqwtmmjwUR6YDgsGgJatRRUP4';
+const contractAddress ='ct_41pSis1ZFvxPWUkw6j6u7AG1k9FaepuaaQwRJKP6S9oXcZxYT';
 var client = null;
-var JobArray = [];
-var JobLength = 0;
+var jobArray = [];
+var jobLength = 0;
 
-
+//user-defined function
+function olu() {
+  alert('User Session Started!');
+}
 
 function renderJobs() {
-  JobArray = JobArray.sort(function(a,b){return b.votes-a.votes})
+    jobArray = jobArray.sort(function(a,b){return b.votes-a.votes})
     var template = $('#template').html();
     Mustache.parse(template);
-    var rendered = Mustache.render(template, {JobArray});
+    var rendered = Mustache.render(template, {jobArray});
+
     $('#jobBody').html(rendered);
-  }
-
-
-  async function callStatic(func, args) {
-
-    const contract = await client.getContractInstance(contractSource, {
-      contractAddress
-    });
-  
-    const calledGet = await contract.call(func, args, {
-      callStatic: true
-    }).catch(e => console.error(e));
-  
-    const decodedGet = await calledGet.decode().catch(e => console.error(e));
-  
-    return decodedGet;
+    console.log("Rendered")
   }
   
-  async function contractCall(func, args, value) {
-    const contract = await client.getContractInstance(contractSource, {
-      contractAddress
-    });
-    //Make a call to write smart contract func, with aeon value input
-    const calledSet = await contract.call(func, args, {
-      amount: value
-    }).catch(e => console.error(e));
-  
-    return calledSet;
-  }
-  
-  
-  window.addEventListener('load', async () => {
+   
+  window.addEventListener('load', async () => { 
     $("#loader").show();
   
     client = await Ae.Aepp();
-
-    total = await callStatic('getdetailsNum', []);
-    console.log("TOTal number of jobs", total)
-
-
-
-    for (let i = 1; i <= total; i++) {
-      const jobs = await callStatic('getJob', [i]);
   
-      JobArray.push({
-        index: i,
-        jobUrl: jobs.url,
-        creatorName: jobs.nameOfJob,
-        votes: jobs.voteCount,
+    const contract = await client.getContractInstance(contractSource, {contractAddress});
+    const calledGet = await contract.call('getdetailsNum', [], {callStatic: true}).catch(e => console.error(e));
+    console.log('calledGet', calledGet);
   
-      })
-    }
+    const decodedGet = await calledGet.decode().catch(e => console.error(e));
+    console.log('decodedGet', decodedGet);
   
     renderJobs();
   
@@ -110,19 +77,25 @@ function renderJobs() {
   jQuery("#jobBody").on("click", ".voteBtn", async function(event){
     const value = $(this).siblings('input').val();
     const dataIndex = event.target.id;
-    const foundIndex = memeArray.findIndex(meme => meme.index == dataIndex);
-    memeArray[foundIndex].votes += parseInt(value, 10);
+    const foundIndex = jobArray.findIndex(job => job.index == dataIndex);
+    jobArray[foundIndex].votes += parseInt(value, 10);
     renderJobs();
   });
   
   $('#registerBtn').click(async function(){
-    var name = ($('#regName').val()),
-        url = ($('#regUrl').val());
+    var company = ($('#companyUrl').val()),
+        role = ($('#roleUrl').val()),
+        picture = ($('#pictureUrl').val()),
+        job = ($('#jobUrl').val()),
+        location = ($('#loactionUrl').val());
   
-        JobArray.push({
-      creatorName: name,
-      jobUrl: url,
-      index: memeArray.length+1,
+    jobArray.push({
+      companyName: company,
+      jobRole: role,
+      jobLink: job,
+      jobLocation: location,
+      picture: picture,
+      index: jobArray.length+1,
       votes: 0
     })
   
