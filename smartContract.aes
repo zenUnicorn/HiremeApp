@@ -1,0 +1,36 @@
+contract Hireme = 
+ record detail = 
+  { finderAddress : address,
+    companyName	: string,
+    jobRole	  : string,
+    jobLink	  : string,
+    jobLocation : string,
+    picture : string,
+    voteCount : int }
+    
+ record state = { 
+    details : map(int, detail),
+    detailsNum : int}
+  
+ entrypoint init() = 
+  { details = {},
+    detailsNum = 0 }
+ 
+ entrypoint getJob(index : int) : detail = 
+  switch(Map.lookup(index, state.details))
+   None  => abort("There is no Job with that ID.")
+   Some(x) => x
+
+ stateful entrypoint addJob(companyName' : string, jobRole' : string, jobLink' : string, jobLocation' : string,picture' : string) = 
+  let detail = { finderAddress  = Call.caller, companyName = companyName', jobRole = jobRole', jobLink = jobLink', picture = picture', jobLocation = jobLocation', voteCount = 0}
+  let index = getdetailsNum() + 1
+  put(state {details[index] = detail, detailsNum = index})
+  
+ entrypoint getdetailsNum() : int = 
+  state.detailsNum
+ payable stateful entrypoint voteJob(index : int) =
+  let detail = getJob(index)
+  Chain.spend(detail.finderAddress, Call.value)
+  let updatedvoteCount = detail.voteCount + Call.value
+  let updatedDetails = state.details{ [index].voteCount = updatedvoteCount }
+  put(state{ details = updatedDetails })
