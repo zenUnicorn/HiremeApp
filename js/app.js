@@ -55,26 +55,45 @@ function renderJobs() {
     $('#jobBody').html(rendered);
     console.log("Rendered")
   }
-  
+   async function callStatic(func, args){
+      const contract = await client.getContractInstance(contractSource, {contractAddress});
+      const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
+      
+
+      const decodedGet = await calledGet.decode().catch(e => console.error(e));
+      return decodedGet;
+   }
+
+
+
    
   window.addEventListener('load', async () => { 
     $("#loader").show();
   
     client = await Ae.Aepp();
   
-    const contract = await client.getContractInstance(contractSource, {contractAddress});
-    const calledGet = await contract.call('getdetailsNum', [], {callStatic: true}).catch(e => console.error(e));
-    console.log('calledGet', calledGet);
-  
-    const decodedGet = await calledGet.decode().catch(e => console.error(e));
-    console.log('decodedGet', decodedGet);
+    detailsNum = await callStatic ('getdetailsNum',[]);
+    for (let i = 1;  i<= detailsNum; i++) {
+          const job = await callStatic('getJob',[i]);
+
+          jobArray.push({
+            companyName: job.companyName,
+            jobRole: job.jobRole,
+            jobLink: job.jobLink,
+            jobLocation: job.jobLocation,
+            picture: job.picture,
+            index: i,
+            votes: job.voteCount,
+          })
+      
+    }
   
     renderJobs();
   
     $("#loader").hide();
   });
   
-  jQuery("#jobBody").on("click", ".voteBtn", async function(event){
+jQuery("#jobBody").on("click", ".voteBtn", async function(event){
     const value = $(this).siblings('input').val();
     const dataIndex = event.target.id;
     const foundIndex = jobArray.findIndex(job => job.index == dataIndex);
