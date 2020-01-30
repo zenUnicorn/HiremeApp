@@ -55,6 +55,7 @@ function renderJobs() {
     $('#jobBody').html(rendered);
     console.log("Rendered")
   }
+
    async function callStatic(func, args){
       const contract = await client.getContractInstance(contractSource, {contractAddress});
       const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
@@ -64,7 +65,12 @@ function renderJobs() {
       return decodedGet;
    }
 
+async function ContractCall(func, args, value){
+  const contract = await client.getContractInstance(contractSource, {contractAddress});
+  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
 
+  return calledSet;
+}
 
    
   window.addEventListener('load', async () => { 
@@ -94,19 +100,30 @@ function renderJobs() {
   });
   
 jQuery("#jobBody").on("click", ".voteBtn", async function(event){
+  $("#loader").show();
+
     const value = $(this).siblings('input').val();
     const dataIndex = event.target.id;
+
+    await contractCall('voteJob', [dataIndex], value);
+
     const foundIndex = jobArray.findIndex(job => job.index == dataIndex);
     jobArray[foundIndex].votes += parseInt(value, 10);
+
     renderJobs();
+    $("#loader").hide();
   });
   
   $('#registerBtn').click(async function(){
-    var company = ($('#companyUrl').val()),
+    $("#loader").show();
+
+    const company = ($('#companyUrl').val()),
         role = ($('#roleUrl').val()),
         picture = ($('#pictureUrl').val()),
         job = ($('#jobUrl').val()),
         location = ($('#loactionUrl').val());
+
+    await contractCall('addJob', [company, role, picture, job, location], 0);
   
     jobArray.push({
       companyName: company,
@@ -119,4 +136,5 @@ jQuery("#jobBody").on("click", ".voteBtn", async function(event){
     })
   
     renderJobs();
+    $("#loader").hide();
   });
