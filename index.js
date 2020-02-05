@@ -39,6 +39,11 @@ var client = null // client defuault null
 var jobList = [] // empty arr
 var jobListLength = 0 // empty product list lenghth
 
+//session defined function
+function olu(){
+  alert("User session Started!");
+}
+
 
 // asychronus read from the blockchain
 async function callStatic(func, args) {
