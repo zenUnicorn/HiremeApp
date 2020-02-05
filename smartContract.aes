@@ -1,36 +1,32 @@
-contract Hireme = 
- record detail = 
-  { finderAddress : address,
-    companyName	: string,
-    jobRole	  : string,
-    jobLink	  : string,
-    jobLocation : string,
-    picture : string,
-    voteCount : int }
-    
- record state = { 
-    details : map(int, detail),
-    detailsNum : int}
-  
- entrypoint init() = 
-  { details = {},
-    detailsNum = 0 }
- 
- entrypoint getJob(index : int) : detail = 
-  switch(Map.lookup(index, state.details))
-   None  => abort("There is no Job with that ID.")
-   Some(x) => x
+contract Hireme =
+  record detail ={
+    id:int,
+    name:string,
+    description:string,
+    createdAt:int,
+    updatedAt:int,
+    jobdate:int,
+    created_by:address,
+    jobsalary:int}
 
- stateful entrypoint addJob(companyName' : string, jobRole' : string, jobLink' : string, jobLocation' : string,picture' : string) = 
-  let detail = { finderAddress  = Call.caller, companyName = companyName', jobRole = jobRole', jobLink = jobLink', picture = picture', jobLocation = jobLocation', voteCount = 0}
-  let index = getdetailsNum() + 1
-  put(state {details[index] = detail, detailsNum = index})
+  record state ={
+    index_counter:int,
+    details:map(int,detail)}
+      
+  entrypoint init()={
+    index_counter=0,
+    details={}}
+    
+  entrypoint getjobLength():int=
+    state.index_counter
+
+  entrypoint get_job_by_index(index:int) : detail = 
+    switch(Map.lookup(index, state.details))
+      None => abort("Jobs does not exist with this index")
+      Some(x) => x  
+
+  stateful entrypoint add_job(_name:string,_description:string,jobdate:int, jobsalary:int) =
+   let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary}
+   let index = getjobLength() + 1
+   put(state{details[index]=stored_job,index_counter=index})
   
- entrypoint getdetailsNum() : int = 
-  state.detailsNum
- payable stateful entrypoint voteJob(index : int) =
-  let detail = getJob(index)
-  Chain.spend(detail.finderAddress, Call.value)
-  let updatedvoteCount = detail.voteCount + Call.value
-  let updatedDetails = state.details{ [index].voteCount = updatedvoteCount }
-  put(state{ details = updatedDetails })

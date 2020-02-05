@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
-</head>
 <body>
 <header id="header" class="header">
     <div class="container">
@@ -27,7 +26,7 @@
                     <div class="six columns">
                         <div class="hero-content">
                                 <h2>Hire a Developer Today</h2>
-                                <a href="jobs.html"><button class="btn btn-primary">Find Jobs</button></a>
+                                <a href="index2.html"><button class="btn btn-primary">Find Jobs</button></a>
                                 <p>Hireme is a freelance website that runs on the aeternity blockchain. Its just like fiver, upwork and other freelance website.</p>
                         </div>
                     </div>
@@ -56,9 +55,6 @@
         </div>
 
         <hr>
-            <h2>Registered Jobs!</h2> 
-            <div id="jobBody"></div>                       
-        <hr>
 <footer>
        
     <a class="link" href="#">Built with love by Shittu Olumide AYodeji</a>
@@ -68,32 +64,16 @@
                                 <a class="link" href="#">Linkedin</a>
                                 <a class="link" href="#">Facebook</a>
     </footer>
-    <script id="template" type="x-tmpl-mustache">
-        {{#JobArray}}
-            <div class="card">
-                    <h5 class="card-title">{{companyName}}</h5>
-                    <h5>{{jobRole}}</h5>
-                    <h5>{{jobLink}}</h5>
-                    <h5>{{jobLocation}}</h5>
-                    <img src="{{picture}}">
-                    <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">{{votes}} ættos</h6>
-                    <input type="number" class="form-control" placeholder="Amount" id={{index}}>
-                    <button class="btn voteBtn btn-block" id={{index}}>VOTE</button>
-                    </div>
-            </div>
-    {{/JobArray}}
-    </script>
-    <script src="js/app.js"></script>
-          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-          crossorigin="anonymous"></script>
-          
-        <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js">
-          </script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-          crossorigin="anonymous"></script>
+    
+         <!-- JQuery -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+        <!-- aeternity -->
+            <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
+        <!-- custom js -->
+        <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
+
