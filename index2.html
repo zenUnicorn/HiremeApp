@@ -39,22 +39,9 @@
 
     <div id="courses-list" class="container">
         <h1 id="heading" class="heading">Register Jobs</h1><br>
-<!--         <center><button class="btn btn-primary">Transfer</button> <button class="btn btn-primary">Refer</button> <button
-                class="btn btn-primary">Balance</button></center> -->
+        <center><button class="btn btn-primary">Transfer</button> <button class="btn btn-primary">Refer</button> <button
+                class="btn btn-primary">Balance</button></center>
         <div class="container">
-            <!-- <form id="registerForm">  
-            </form><label for="">Company Name</label>
-                <input type="text" id="companyUrl" class="form-control" placeholder="Name of Comapny"><br>
-                <label for="">Job Role</label>
-                <input type="text" id="roleUrl" class="form-control" placeholder="Job Role"><br>
-                <label for="">Picture</label>
-                <input type="file" id="pictureUrl" class="form-control"><br>
-                <label for="">Job Link</label>
-                <input type="text" id="jobUrl" class="form-control" placeholder="Job Url (not compulsory)"><br>
-                <label for="">Job Location</label>
-                <input type="text" id="locationUrl" class="form-control" placeholder="Job Location"><br>
-                <button id="addBtn" class="btn btn-primary">Register</button>
-            </form> -->
             <div class="text-center border border-light p-5" id="add_event_form">                
                 <!-- Name -->
                 <label for="">Job Name</label>
@@ -88,7 +75,7 @@
                                 <!-- Card image -->
                                 <div class="view view-cascade overlay">
                                   <img class="card-img-top" src="img/job2.jpeg" alt="Card image cap">
-                                  <a href="#!">
+                                  <a href="#!">3
                                     <div class="mask rgba-white-slight"></div>
                                   </a>
                                 </div>
@@ -99,19 +86,19 @@
                                   <!-- Title -->
                                   <h4 class="card-title">Job Position:   <strong>{{name}}</strong></h4>
                                   <!-- Subtitle -->
-                                  <h6 class="font-weight-bold indigo-text py-2">
-                                      <button id="{{id}}" class="btn btn-primary" type="button"> 
-                                  </h6>
                                   <!-- Text -->
                                   <p class="card-text">
                                     <b>Job Description:</b> {{description}}
                                  </p>
-                                 <p>Get Paid ${{jobsalary}} in Aethos.</p>
+                                 <p>Get Paid {{jobsalary}} in Aethos.</p>
                                  <b>Job Closing Date: </b>         
                                 <p class="card-text">
                                     {{jobdate}}
                                 </p>                  
                                 </div>
+                                <h6 class="font-weight-bold indigo-text py-2">
+                                    <button id="{{id}}" class="btn btn-primary remove" onclick='removeJob()'>RemoveJob</button>
+                                </h6>
                               </div>
                               <!-- Card -->
                           </div>

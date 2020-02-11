@@ -30,7 +30,6 @@ contract Hireme =
    let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary}
    let index = getjobLength() + 1
    put(state{details[index]=stored_job,index_counter=index})
-  
 `
 
 const contractAddress ='ct_Z33yy25drGF1fAomz9MjBygLMcewKqd45TWuX2e734KzA21JN'
@@ -39,11 +38,9 @@ var client = null // client defuault null
 var jobList = [] // empty arr
 var jobListLength = 0 // empty product list lenghth
 
-//session defined function
-function olu(){
-  alert("User session Started!");
+function olu() {
+  alert('User Session Started!');
 }
-
 
 // asychronus read from the blockchain
 async function callStatic(func, args) {
@@ -137,4 +134,17 @@ $("#addBtn").click(async function(){
     $("#jobdate").val("");
     $("#jobsalary").val("");
     $("#loader").hide();
+
+// remove course from the dom
+function removeJob(e) {
+  let job, jobId;
+
+  // Remove from the dom
+  if(e.target.classList.contains('remove')) {
+       e.target.parentElement.parentElement.remove();
+       course = e.target.parentElement.parentElement;
+       jobId = job.querySelector('button').getAttribute('id');
+  }
+  console.log(jobId);
+}
 })
