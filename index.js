@@ -151,7 +151,7 @@ $("#jobBody").on("click",".bookBtn", async function(event){
   $("#loader").show();
 
   const dataIndex = event.target.id
-  const jobListArrPrice = jobListArr[dataIndex - 1].price
+  const jobListArrPrice = jobListArr[dataIndex - 1]
   console.log("Job Booking Price ",jobListArrPrice)
   const purchased_job = await contractCall('book_job', [dataIndex],parseInt(jobListArrPrice, 10));
   console.log("Book Job: ", purchased_job)

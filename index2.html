@@ -39,8 +39,6 @@
 
     <div id="courses-list" class="container">
         <h1 id="heading" class="heading">Register Jobs</h1><br>
-        <!-- <center><button class="btn btn-primary">Transfer</button> <button class="btn btn-primary">Refer</button> <button
-                class="btn btn-primary">Balance</button></center> -->
         <div class="container">
             <div class="text-center border border-light p-5" id="add_event_form">                
                 <!-- Name -->
@@ -69,7 +67,9 @@
                 <button class="btn btn-info btn-block" type="button" id="addBtn">Register Job</button>
           </div>
         <div class="container">
-            <div id="jobBody"></div>
+            <div id="jobBody">
+                <h2>Job Offers!</h2>
+            </div>
 
             <hr>
             <footer>
@@ -89,6 +89,7 @@
                                 <div class="card-body card-body-cascade text-center">
                               
                                   <!-- Title -->
+                                  <p>job id: {{id}}</p>
                                   <h4 class="card-title">Job Position:   <strong>{{name}}</strong></h4>
                                   <!-- Text -->
                                   <p class="card-text">
@@ -101,7 +102,7 @@
                                 </p>                  
                                 </div>
                                 <h6 class="font-weight-bold indigo-text py-2">
-                                    <button id=" {{id}} " class="btn btn-info bookBtn" type="button">Book Job For $ {{price}} in Aethos. 
+                                    <button id="{{id}}" class="btn btn-info bookBtn" type="button">Book Job For $ {{price}} in Aethos. 
                                 </h6>
                               </div>
                               <!-- Card -->
