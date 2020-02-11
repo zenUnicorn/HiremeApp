@@ -38,9 +38,19 @@ var client = null // client defuault null
 var jobList = [] // empty arr
 var jobListLength = 0 // empty product list lenghth
 
-function olu() {
-  alert('User Session Started!');
+// remove course from the dom
+function removeJob(e) {
+  let job, jobId;
+
+  // Remove from the dom
+  if(e.target.classList.contains('remove')) {
+       e.target.parentElement.parentElement.remove();
+       course = e.target.parentElement.parentElement;
+       jobId = job.querySelector('button').getAttribute('data-id');
+  }
+  console.log(jobId);
 }
+
 
 // asychronus read from the blockchain
 async function callStatic(func, args) {
@@ -134,17 +144,4 @@ $("#addBtn").click(async function(){
     $("#jobdate").val("");
     $("#jobsalary").val("");
     $("#loader").hide();
-
-// remove course from the dom
-function removeJob(e) {
-  let job, jobId;
-
-  // Remove from the dom
-  if(e.target.classList.contains('remove')) {
-       e.target.parentElement.parentElement.remove();
-       course = e.target.parentElement.parentElement;
-       jobId = job.querySelector('button').getAttribute('id');
-  }
-  console.log(jobId);
-}
 })
