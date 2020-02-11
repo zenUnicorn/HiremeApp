@@ -7,6 +7,7 @@ contract Hireme =
     updatedAt:int,
     jobdate:int,
     created_by:address,
+    price:int,
     jobsalary:int}
 
   record state ={
@@ -25,8 +26,14 @@ contract Hireme =
       None => abort("Jobs does not exist with this index")
       Some(x) => x  
 
-  stateful entrypoint add_job(_name:string,_description:string,jobdate:int, jobsalary:int) =
-   let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary}
+  stateful entrypoint add_job(_name:string,_description:string,jobdate:int,jobsalary:int,price:int) =
+   let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary, price=price}
    let index = getjobLength() + 1
    put(state{details[index]=stored_job,index_counter=index})
-  
+
+  payable stateful entrypoint book_job(_id:int)=
+   let jobth = get_job_by_index(_id) 
+   let job_owner  = jobth.created_by : address
+   require(jobth.id > 0,abort("NOT A Job ID"))
+   require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
+   Chain.spend(job_owner, Call.value) 

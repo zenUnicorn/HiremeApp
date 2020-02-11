@@ -8,6 +8,7 @@ contract Hireme =
     updatedAt:int,
     jobdate:int,
     created_by:address,
+    price:int,
     jobsalary:int}
 
   record state ={
@@ -26,17 +27,24 @@ contract Hireme =
       None => abort("Jobs does not exist with this index")
       Some(x) => x  
 
-  stateful entrypoint add_job(_name:string,_description:string,jobdate:int, jobsalary:int) =
-   let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary}
+  stateful entrypoint add_job(_name:string,_description:string,jobdate:int,jobsalary:int,price:int) =
+   let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary, price=price}
    let index = getjobLength() + 1
    put(state{details[index]=stored_job,index_counter=index})
+
+  payable stateful entrypoint book_job(_id:int)=
+   let jobth = get_job_by_index(_id) 
+   let job_owner  = jobth.created_by : address
+   require(jobth.id > 0,abort("NOT A Job ID"))
+   require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
+   Chain.spend(job_owner, Call.value)  
 `
 
-const contractAddress ='ct_Z33yy25drGF1fAomz9MjBygLMcewKqd45TWuX2e734KzA21JN'
+const contractAddress ='ct_2chsvnob2kEVxAvPtMYfGGjPe7AtqWhtaFjWkbCE4BMMLp1YLh'
 
 var client = null // client defuault null
 var jobList = [] // empty arr
-var jobListLength = 0 // empty product list lenghth
+var jobListLength = 0 // empty job list lenghth
 
 // asychronus read from the blockchain
 async function callStatic(func, args) {
@@ -85,7 +93,8 @@ window.addEventListener('load', async() => {
         updatedAt:new Date(getjobList.updatedAt),
         created_by:getjobList.created_by,
         jobdate:new Date(getjobList.jobdate),
-        jobsalary:getjobList.jobsalary
+        jobsalary:getjobList.jobsalary,
+        price:getjobList.price
       })
     }
     renderjobList();  
@@ -100,9 +109,10 @@ $("#addBtn").click(async function(){
     var description = ($("#description").val());
     var jobdate =($("#jobdate").val()) ;
     var jobsalary = ($("#jobsalary").val());
+    var price = ($("#price").val());
     var jdate = new Date(jobdate).getTime()
     
-   await contractCall('add_job', [name, description, jdate, jobsalary],0);
+   await contractCall('add_job', [name, description, jdate, jobsalary,price],0);
 
     const all  = await callStatic('getjobLength', [])
     // Push to array
@@ -117,7 +127,8 @@ $("#addBtn").click(async function(){
       updatedAt:new Date(newJob.updatedAt),
       created_by:newJob.created_by,
       jobdate:new Date(newJob.jobdate),
-      jobsalary:newJob.jobsalary
+      jobsalary:newJob.jobsalary,
+      price:newJob.price
     })
 
     
@@ -129,5 +140,28 @@ $("#addBtn").click(async function(){
     $("#description").val("");
     $("#jobdate").val("");
     $("#jobsalary").val("");
+    $("#price").val("");
     $("#loader").hide();
 })
+
+// Book Job
+$("#jobBody").on("click",".bookBtn", async function(job){
+
+  $("#loader").show();
+
+  const jobIndex = job.target.id
+  console.log(typeof jobIndex)
+  const jobListArrPrice = jobListArr[jobIndex - 1].price
+  console.log("Job Booking Price ",jobListArrPrice)
+  const purchased_job = await contractCall('book_job', [jobIndex],parseInt(jobListArrPrice, 10));
+  console.log("Book Job: ", purchased_job)
+
+  console.log("Job Index:", jobIndex)
+  console.log("Running...")
+  
+  console.log("Successfully Booked a Job, fill in your email in the prompt to get notified when your job is ready!");
+  prompt('Email: ')
+
+  event.preventDefault();
+  $("#loader").hide();
+});

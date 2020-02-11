@@ -60,6 +60,11 @@
                     <label for="">Job Salary</label>
                     <input type="number" id="jobsalary" class="form-control mb-4" placeholder="Salary...">
                 </div>
+                <!-- Price -->
+                <div class="form-group">
+                    <label for="">Job Booking Price</label>
+                    <input type="number" id="price" class="form-control mb-4" placeholder="Job Booking Price">
+                </div>
                 <!-- Sign in button -->
                 <button class="btn btn-info btn-block" type="button" id="addBtn">Register Job</button>
           </div>
@@ -85,12 +90,14 @@
                               
                                   <!-- Title -->
                                   <h4 class="card-title">Job Position:   <strong>{{name}}</strong></h4>
-                                  <!-- Subtitle -->
+                                    <h6 class="font-weight-bold indigo-text py-2">
+                                        <button id="{{id}}" class="btn btn-info bookBtn" type="button">Book Job For ${{price}} in Aethos. 
+                                    </h6>
                                   <!-- Text -->
                                   <p class="card-text">
                                     <b>Job Description:</b> {{description}}
                                  </p>
-                                 <p>Get Paid {{jobsalary}} in Aethos.</p>
+                                 <p>Get Paid ${{jobsalary}} in Aethos.</p>
                                  <b>Job Closing Date: </b>         
                                 <p class="card-text">
                                     {{jobdate}}
