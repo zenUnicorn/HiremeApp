@@ -45,6 +45,7 @@ const contractAddress ='ct_2chsvnob2kEVxAvPtMYfGGjPe7AtqWhtaFjWkbCE4BMMLp1YLh'
 var client = null // client defuault null
 var jobList = [] // empty arr
 var jobListLength = 0 // empty job list lenghth
+var jobListArr = [] // empty arr
 
 // asychronus read from the blockchain
 async function callStatic(func, args) {
