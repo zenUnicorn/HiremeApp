@@ -32,8 +32,8 @@ contract Hireme =
    let index = getjobLength() + 1
    put(state{details[index]=stored_job,index_counter=index})
 
-  payable stateful entrypoint book_job(id:int)=
-   let jobth = get_job_by_index(id) 
+  payable stateful entrypoint book_job(_id:int)=
+   let jobth = get_job_by_index(_id) 
    let job_owner  = jobth.created_by : address
    require(jobth.id > 0,abort("NOT A Job ID"))
    require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
@@ -69,7 +69,7 @@ async function contractCall(func, args, value) {
 function renderjobList(){
     let template = $('#template').html();
     Mustache.parse(template);
-    var rendered = Mustache.render(template, {jobList});
+    var rendered = Mustache.render(template, {jobListArr});
     $("#jobBody").html(rendered);
     console.log("start rendering.......")
 }
@@ -78,14 +78,13 @@ window.addEventListener('load', async() => {
     $("#loader").show();
     console.log("Loading...")
     console.log("Loading........")
-    console.log("Loading.............")
     client = await Ae.Aepp();
     jobListLength = await callStatic('getjobLength',[]);
     //display the events on the console
     console.log('List Of Jobs On the BlockChain:', jobListLength);
     for(let i = 1; i < jobListLength + 1; i++){
       const getjobList = await callStatic('get_job_by_index', [i]);
-      jobList.push({
+      jobListArr.push({
         index_counter:i,
         id:getjobList.id,
         name:getjobList.name,
@@ -119,7 +118,7 @@ $("#addBtn").click(async function(){
     // Push to array
 
     const newJob  = await callStatic('get_job_by_index', [all])
-    jobList.push({
+    jobListArr.push({
       index_counter:all,
       id:newJob.id,
       name:newJob.name,
@@ -150,7 +149,7 @@ $("#jobBody").on("click",".bookBtn", async function(event){
   $("#loader").show();
 
   const dataIndex = event.target.id
-  const jobListArrPrice = jobListArr[dataIndex - 1]
+  const jobListArrPrice = jobListArr[dataIndex - 1]   
   console.log("Job Booking Price ",jobListArrPrice)
   const purchased_job = await contractCall('book_ticket', [dataIndex],parseInt(jobListArrPrice, 10));
   console.log("Book Job: ", purchased_job)
