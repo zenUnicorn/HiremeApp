@@ -38,20 +38,6 @@ var client = null // client defuault null
 var jobList = [] // empty arr
 var jobListLength = 0 // empty product list lenghth
 
-// remove course from the dom
-function removeJob(e) {
-  let job, jobId;
-
-  // Remove from the dom
-  if(e.target.classList.contains('remove')) {
-       e.target.parentElement.parentElement.remove();
-       course = e.target.parentElement.parentElement;
-       jobId = job.querySelector('button').getAttribute('data-id');
-  }
-  console.log(jobId);
-}
-
-
 // asychronus read from the blockchain
 async function callStatic(func, args) {
     const contract = await client.getContractInstance(contractSource, {contractAddress});
@@ -87,7 +73,7 @@ window.addEventListener('load', async() => {
     client = await Ae.Aepp();
     jobListLength = await callStatic('getjobLength',[]);
     //display the events on the console
-    console.log('List Of Jobs:', jobListLength);
+    console.log('List Of Jobs On the BlockChain:', jobListLength);
     for(let i = 1; i < jobListLength + 1; i++){
       const getjobList = await callStatic('get_job_by_index', [i]);
       jobList.push({
