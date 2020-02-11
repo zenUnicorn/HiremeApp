@@ -32,7 +32,7 @@ contract Hireme =
    let index = getjobLength() + 1
    put(state{details[index]=stored_job,index_counter=index})
 
-  payable stateful entrypoint book_job(_id:int)=
+  payable stateful entrypoint book_job(id:int)=
    let jobth = get_job_by_index(_id) 
    let job_owner  = jobth.created_by : address
    require(jobth.id > 0,abort("NOT A Job ID"))
@@ -146,22 +146,21 @@ $("#addBtn").click(async function(){
 })
 
 // Book Job
-$("#jobBody").on("click",".bookBtn", async function(job){
+$("#jobBody").on("click",".bookBtn", async function(event){
 
   $("#loader").show();
 
-  const jobIndex = job.target.id
-  const jobListArrPrice = jobListArr[jobIndex - 1].price
+  const dataIndex = event.target.id
+  const jobListArrPrice = jobListArr[dataIndex - 1].price
   console.log("Job Booking Price ",jobListArrPrice)
-  const purchased_job = await contractCall('book_job', [jobIndex],parseInt(jobListArrPrice, 10));
+  const purchased_job = await contractCall('book_job', [dataIndex],parseInt(jobListArrPrice, 10));
   console.log("Book Job: ", purchased_job)
+  ;
 
-  console.log("Job Index:", jobIndex)
+  console.log("Data Index:", dataIndex)
   console.log("Running...")
+  console.log("Successfully Booked a Job");
   
-  console.log("Successfully Booked a Job, fill in your email in the prompt to get notified when your job is ready!");
-  prompt('Email: ')
-
-  job.preventDefault();
+  event.preventDefault();
   $("#loader").hide();
 });
