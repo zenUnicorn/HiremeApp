@@ -33,7 +33,7 @@ contract Hireme =
    put(state{details[index]=stored_job,index_counter=index})
 
   payable stateful entrypoint book_job(id:int)=
-   let jobth = get_job_by_index(_id) 
+   let jobth = get_job_by_index(id) 
    let job_owner  = jobth.created_by : address
    require(jobth.id > 0,abort("NOT A Job ID"))
    require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
@@ -150,7 +150,7 @@ $("#jobBody").on("click",".bookBtn", async function(event){
   $("#loader").show();
 
   const dataIndex = event.target.id
-  const jobListArrPrice = jobListArr[dataIndex - 1].price
+  const jobListArrPrice = jobListArr[dataIndex - 1]
   console.log("Job Booking Price ",jobListArrPrice)
   const purchased_job = await contractCall('book_ticket', [dataIndex],parseInt(jobListArrPrice, 10));
   console.log("Book Job: ", purchased_job)
