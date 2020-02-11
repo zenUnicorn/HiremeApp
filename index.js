@@ -145,21 +145,20 @@ $("#addBtn").click(async function(){
     $("#loader").hide();
 })
 
-// Book Job
 $("#jobBody").on("click",".bookBtn", async function(event){
 
   $("#loader").show();
 
   const dataIndex = event.target.id
-  const jobListArrPrice = jobListArr[dataIndex - 1]
+  const jobListArrPrice = jobListArr[dataIndex - 1].price
   console.log("Job Booking Price ",jobListArrPrice)
-  const purchased_job = await contractCall('book_job', [dataIndex],parseInt(jobListArrPrice, 10));
+  const purchased_job = await contractCall('book_ticket', [dataIndex],parseInt(jobListArrPrice, 10));
   console.log("Book Job: ", purchased_job)
   ;
 
   console.log("Data Index:", dataIndex)
   console.log("Running...")
-  console.log("Successfully Booked a Job");
+  console.log("Successfully Booked a Job, fill in your email in the prompt to get notified when your job is ready!");
   
   event.preventDefault();
   $("#loader").hide();
