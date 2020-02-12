@@ -40,7 +40,7 @@ contract Hireme =
    Chain.spend(job_owner, Call.value)  
 `
 
-const contractAddress ='ct_2chsvnob2kEVxAvPtMYfGGjPe7AtqWhtaFjWkbCE4BMMLp1YLh'
+const contractAddress ='ct_23BvKBEcBX61LWoJyVQgqHbZ3jTs3HXVxx278Jqwnr1UAiTts5'
 
 var client = null // client defuault null
 var jobListLength = 0 // empty job list lenghth
