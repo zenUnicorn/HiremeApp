@@ -30,10 +30,17 @@ contract Hireme =
   stateful entrypoint add_job(_name:string,_description:string,jobdate:int,jobsalary:int,price:int) =
    let stored_job = {id=getjobLength() + 1,name=_name,description=_description, createdAt=Chain.timestamp,updatedAt=Chain.timestamp,created_by = Call.caller,jobdate=jobdate, jobsalary=jobsalary, price=price}
    let index = getjobLength() + 1
-   put(state{details[index]=stored_job,index_counter=index}) 
+   put(state{details[index]=stored_job,index_counter=index})
+
+  payable stateful entrypoint book_job(id:int)=
+   let jobth = get_job_by_index(id) 
+   let job_owner  = jobth.created_by : address
+   require(jobth.id > 0,abort("NOT A Job ID"))
+   require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
+   Chain.spend(job_owner, Call.value)  
 `
 
-const contractAddress ='ct_2RvVd3JiRaVnuM1wEk86FMJz3zhpHbVHeewa5yXLJx2TqfHc1S'
+const contractAddress ='ct_2KJqeM16ipvCTzp7a7PThZQgNaNkM4f9Xt3GWBqD99cq5azbFP'
 
 var client = null // client defuault null
 var jobListLength = 0 // empty job list lenghth
@@ -136,30 +143,22 @@ $("#addBtn").click(async function(){
     $("#loader").hide();
 })
 
-// //book a job
-// $("#jobBody").on("click",".bookBtn", async function(event){
+//book a job
+$("#jobBody").on("click",".bookBtn", async function(event){
 
-//   $("#loader").show();
+  $("#loader").show();
 
-//   const dataIndex = event.target.id
-//   const jobListArrPrice = jobListArr[dataIndex - 1].price
-//   console.log("Job Booking Price ",jobListArrPrice)
-//   const purchased_job = await contractCall('book_job', [dataIndex],parseInt(jobListArrPrice, 10));
-//   console.log("Book Job: ", purchased_job)
-//   ;
+  const dataIndex = event.target.id
+  const jobListArrPrice = jobListArr[dataIndex - 1].price
+  console.log("Job Booking Price ",jobListArrPrice)
+  const purchased_job = await contractCall('book_job', [dataIndex],parseInt(jobListArrPrice, 10));
+  console.log("Book Job: ", purchased_job)
+  ;
 
-//   console.log("Data Index:", dataIndex)
-//   console.log("Running...")
-//   console.log("Successfully Booked a Job fill in your email in the prompt to get notified when your job is ready!");
+  console.log("Data Index:", dataIndex)
+  console.log("Running...")
+  console.log("Successfully Booked a Job fill in your email in the prompt to get notified when your job is ready!");
   
-//   event.preventDefault();
-//   $("#loader").hide();
-//});
-
-
-// payable stateful entrypoint book_job(id:int)=
-//    let jobth = get_job_by_index(id) 
-//    let job_owner  = jobth.created_by : address
-//    require(jobth.id > 0,abort("NOT A Job ID"))
-//    require(Call.value >= jobth.price,abort("You Don't Have Enough AE"))
-//    Chain.spend(job_owner, Call.value)  
+  event.preventDefault();
+  $("#loader").hide();
+});

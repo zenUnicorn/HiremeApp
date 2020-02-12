@@ -74,38 +74,38 @@
             <footer>
                 <script id="template" type="x-tmpl-mustache">
                     {{#jobList}}
-                    <div class="mb-3">
-                            <div class="card card-cascade wider reverse">
-                                <!-- Card image -->
-                                <div class="view view-cascade overlay">
-                                  <img class="card-img-top" src="img/job2.jpeg" alt="Card image cap">
-                                  <a href="#!">
-                                    <div class="mask rgba-white-slight"></div>
-                                  </a>
+                        <div class="mb-3">
+                                <div class="card card-cascade wider reverse">
+                                    <!-- Card image -->
+                                    <div class="view view-cascade overlay">
+                                    <img class="card-img-top" src="img/job2.jpeg" alt="Card image cap">
+                                    <a href="#!">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                    </div>
+                                
+                                    <!-- Card content -->
+                                    <div class="card-body card-body-cascade text-center">
+                                
+                                    <!-- Title -->
+                                    <p>job id: {{id}}</p>
+                                    <h4 class="card-title">Job Position:   <strong>{{name}}</strong></h4>
+                                    <!-- Text -->
+                                    <p class="card-text">
+                                        <b>Job Description:</b> {{description}}
+                                    </p>
+                                    <p>Get Paid $ {{jobsalary}} in Aethos.</p>
+                                    <b>Job Closing Date: </b>         
+                                    <p class="card-text">
+                                        {{jobdate}}
+                                    </p>                  
+                                    </div>
+                                    <h6 class="font-weight-bold indigo-text py-2">
+                                        <button id="{{id}}" class="btn btn-info bookBtn" type="button">Book Job For $ {{price}} in Aethos. 
+                                    </h6>
                                 </div>
-                              
-                                <!-- Card content -->
-                                <div class="card-body card-body-cascade text-center">
-                              
-                                  <!-- Title -->
-                                  <p>job id: {{id}}</p>
-                                  <h4 class="card-title">Job Position:   <strong>{{name}}</strong></h4>
-                                  <!-- Text -->
-                                  <p class="card-text">
-                                    <b>Job Description:</b> {{description}}
-                                 </p>
-                                 <p>Get Paid $ {{jobsalary}} in Aethos.</p>
-                                 <b>Job Closing Date: </b>         
-                                <p class="card-text">
-                                    {{jobdate}}
-                                </p>                  
-                                </div>
-                                <h6 class="font-weight-bold indigo-text py-2">
-                                    <button id="{{id}}" class="btn btn-info bookBtn" type="button">Book Job For $ {{price}} in Aethos. 
-                                </h6>
-                              </div>
-                              <!-- Card -->
-                          </div>
+                                <!-- Card -->
+                            </div>
                 
                     {{/jobList }}
             </script>
