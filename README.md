@@ -12,7 +12,7 @@ The main idea behind the whole aepp is to aid transparency, because over the yea
 With the aepp, developers or freelancers can know who ro work for and who they should not work for.
 
 * Go to this link http://base.aepps.com/
-* Inspect the Page and reload by pressing Ctrl + Shift + i 
+* Inspect the Page and reload by pressing `Ctrl + Shift + i` 
 * Paste this link https://zenunicorn.github.io/HiremeApp/
 
 ![Screenshots!](/img/download2.png "Screenshots")
