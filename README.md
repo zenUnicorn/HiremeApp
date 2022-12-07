@@ -32,4 +32,6 @@ With the aepp, developers or freelancers can know who ro work for and who they s
 - [Aeternity](www.aeternity.com)
 - [Dacade](www.dacade.org)
 
+### Built with ❤️  cc 2020
+
 Thanks!
