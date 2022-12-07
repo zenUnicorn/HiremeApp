@@ -21,7 +21,7 @@ With the aepp, developers or freelancers can know who ro work for and who they s
 - Sophia programming language
 - JavaScript
 - GitHub
-
+- HTML / CSS
 
 ## Links 🌍 
 - [Aeternity](www.aeternity.com)
