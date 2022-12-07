@@ -20,6 +20,7 @@ With the aepp, developers or freelancers can know who ro work for and who they s
 ## Tools 🛠 
 - Sophia programming language
 - JavaScript
+- GitHub
 
 
 ## Links 🌍 
