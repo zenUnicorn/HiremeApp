@@ -1,6 +1,6 @@
 # HiremeApp
 
-Hello my name is Shittu Olumide Ayodeji, I am a software developer. I feel so honored and happy to have worked with the aeternity blockchain after taking the aeternity 101 course on [dacade](wwww.dacade.org) .
+I feel so honored and happy to have worked with the aeternity blockchain after taking the aeternity 101 course on [dacade](wwww.dacade.org).
 
 ## Problem statement
 
@@ -16,5 +16,11 @@ With the aepp, developers or freelancers can know who ro work for and who they s
 * Paste this link https://zenunicorn.github.io/HiremeApp/
 
 ![Screenshots!](/img/download2.png "Screenshots")
+
+## Tools 🛠 
+- Sophia programming language
+
+
+## Links 🌍 
 
 Thanks!
